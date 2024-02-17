@@ -3,10 +3,12 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 
+import Homepage from "./pages/Homepage";
 import Layout from "./layout/Layout";
 import Loginpage from "./pages/Loginpage";
-import Registerpage from "./pages/Registerpage";
 import Resetpasswordpage from "./pages/Resetpasswordpage";
+import Registerpage from "./pages/Registerpage";
+
 
 
 const router = createBrowserRouter([
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "",
+        element: <Homepage />,
+      },
+      {
+        path: "/dashboard",
+        element: <h1>DASHBOARD</h1>,
+      },
       {
         path: "/login",
         element: <Loginpage />,
@@ -33,6 +43,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 function App() {
   return (
