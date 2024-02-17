@@ -17,7 +17,9 @@ const Loginbox = () => {
   const [LoginBtnValue, setLoginButtonValue] = useState("Login");
   const navigate = useNavigate();
 
-  const [imageValue, setImageValue] = useState(Math.floor(Math.random() * 11) + 1);
+  const [imageValue, setImageValue] = useState(
+    Math.floor(Math.random() * 11) + 1
+  );
 
   const [notification, setNotification] = useState({
     Name: "notification slideXto0",
@@ -53,16 +55,32 @@ const Loginbox = () => {
       .then((userCredential) => {
         if (userCredential.user.emailVerified === false) {
           setNotification({
-            Name:"notification",
+            Name: "notification",
             Message: "Please verify your email address",
           });
-          scrollTo(0,0)
+          scrollTo(0, 0);
           setLoginButtonValue("Login");
         } else {
           const user = userCredential.user;
-          Cookies.set("user", user.email, { expires: 1,secure: true });
-          Cookies.set("uid", user.uid, { expires: 1,secure: true });
-          Cookies.set("jwt", user.accessToken, { expires: 1,secure: true });
+          // Setting cookies with appropriate domain, path, and secure flag
+          Cookies.set("user", user.email, {
+            expires: 1,
+            secure: true,
+            domain: "3.89.187.191",
+            path: "/",
+          });
+          Cookies.set("uid", user.uid, {
+            expires: 1,
+            secure: true,
+            domain: "3.89.187.191",
+            path: "/",
+          });
+          Cookies.set("jwt", user.accessToken, {
+            expires: 1,
+            secure: true,
+            domain: "3.89.187.191",
+            path: "/",
+          });
           console.log(user);
           setLoginButtonValue("Login");
           navigate("/");
@@ -74,7 +92,7 @@ const Loginbox = () => {
         if (error.code === "auth/invalid-credential") {
           window.scrollTo(0, 0);
           setNotification({
-            Name:"notification",
+            Name: "notification",
             Message: "Invalid Credentials",
           });
         }
