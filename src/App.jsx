@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
 
 import Layout from "./layout/Layout";
 import Loginpage from "./pages/Loginpage";
@@ -36,7 +37,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+    <CookiesProvider>
       <RouterProvider router={router} />
+    </CookiesProvider>
     </>
   );
 }

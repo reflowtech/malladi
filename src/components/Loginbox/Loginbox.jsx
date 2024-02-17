@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import "./Loginbox.css";
 
 import Cookies from "js-cookie";
@@ -11,6 +12,8 @@ import { app } from "../../firebase/firebase";
 const auth = getAuth();
 
 const Loginbox = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
+
   document.title = "Login | ReFlow";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,26 +65,9 @@ const Loginbox = () => {
           setLoginButtonValue("Login");
         } else {
           const user = userCredential.user;
-          // Setting cookies with appropriate domain, path, and secure flag
-          Cookies.set("user", user.email, {
-            expires: 1,
-            secure: true,
-            domain: "3.89.187.191",
-            path: "/",
-          });
-          Cookies.set("uid", user.uid, {
-            expires: 1,
-            secure: true,
-            domain: "3.89.187.191",
-            path: "/",
-          });
-          Cookies.set("jwt", user.accessToken, {
-            expires: 1,
-            secure: true,
-            domain: "3.89.187.191",
-            path: "/",
-          });
-          console.log(user);
+          setCookie("user", user.email, { path: "/" });
+          setCookie("uid", user.uid,{ path: "/" });
+          setCookie("jwt", user.accessToken,{ path: "/" });
           setLoginButtonValue("Login");
           navigate("/");
           window.location.reload();
