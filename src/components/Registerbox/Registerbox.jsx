@@ -57,7 +57,7 @@ const Registerbox = () => {
       await set(userTypeRef, userType);
 
       // Send email verification
-      // await sendEmailVerification(userCredential.user);
+      await sendEmailVerification(userCredential.user);
 
       setRegisterButtonValue("Registered!");
       setNotification({
