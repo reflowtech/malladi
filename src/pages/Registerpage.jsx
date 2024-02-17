@@ -13,8 +13,7 @@ const Registerpage = () => {
       const uid = Cookies.get("uid");
 
       if(uid === undefined){
-        setRenderPage(true);
-        // navigate("/");
+        navigate("/");
       }
       else{
         console.log(uid);

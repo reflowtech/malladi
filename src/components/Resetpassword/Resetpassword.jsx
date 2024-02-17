@@ -24,7 +24,6 @@ const Resetpassword = () => {
   };
 
   const handelClick = async (e) => {
-    console.log("Reset password clicked");
     e.preventDefault()
     try {
 
