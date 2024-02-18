@@ -85,7 +85,7 @@ const Userdash = () => {
           <section className="main">
             <>
               <p style={{ textAlign: "left", width: "100%" }}>
-                Hello, <strong>{Cookies.get("user").split("@")[0]}</strong>{" "}
+                Hello, <strong>{Cookies.get("name")}</strong>{" "}
               </p>
               <table>
                 <thead>

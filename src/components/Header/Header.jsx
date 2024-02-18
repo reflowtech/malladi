@@ -18,9 +18,9 @@ const Header = () => {
   const handleLogout = () => {
     Cookies.remove("jwt");
     Cookies.remove("uid");
+    Cookies.remove("name");
     Cookies.remove("user");
     setUser(false);
-    navigate("/");
     window.location.reload();
   };
 

@@ -1,51 +1,47 @@
-import React, {  useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Registerbox from "../components/Registerbox/Registerbox";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, onValue, set } from "firebase/database";
-
-import { useCookies } from 'react-cookie';
-
+import { useCookies } from "react-cookie";
 
 const Registerpage = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
-
-
-  const[renderPage,setRenderPage] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [renderPage, setRenderPage] = useState(false);
   const navigate = useNavigate();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const fetchuser = async () => {
       const uid = Cookies.get("uid");
-      if(uid === undefined){
-        navigate("/");
-      }
-      else{
-        console.log(uid);
+      if (uid === undefined) {
+        navigate("/login");
+      } else {
         const db = getDatabase();
         const userRef = ref(db, `users/${uid}`);
         onValue(userRef, (snapshot) => {
           const data = snapshot.val();
-          if (data.userType != "admin") {
+          if (data.userType !== "admin") {
             navigate("/");
-          }
-          else{
-            setRenderPage(true)
+          } else {
+            setRenderPage(true);
+            setLoading(false); // Set loading to false when user type is fetched
           }
         });
       }
     };
     fetchuser();
-  }, []);
+  }, [navigate]);
 
   return (
     <>
-    <div className="main-box">
-
-      {
-        renderPage? <Registerbox /> : null
-      }
-      </div>
+      {loading ? (
+        <div className="loader">
+          <h1>Loading...!</h1>
+        </div>
+      ) : (
+        <div className="main-box">{renderPage && <Registerbox />}</div>
+      )}
     </>
   );
 };

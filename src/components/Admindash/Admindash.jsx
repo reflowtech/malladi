@@ -85,7 +85,7 @@ const Admindash = () => {
               <div className="dashintro">
                 <p style={{ textAlign: "left", width: "100%" }}>
                   Hello ADMIN ,{" "}
-                  <strong>{Cookies.get("user").split("@")[0]}</strong>{" "}
+                  <strong>{Cookies.get("name")}</strong>{" "}
                 </p>
                 <Link to="/register">Add User</Link>
               </div>

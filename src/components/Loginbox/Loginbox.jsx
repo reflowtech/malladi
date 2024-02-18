@@ -66,6 +66,7 @@ const Loginbox = () => {
         } else {
           const user = userCredential.user;
           setCookie("user", user.email, { path: "/" });
+          setCookie("name",user.email.split("@")[0], { path: "/" });
           setCookie("uid", user.uid,{ path: "/" });
           setCookie("jwt", user.accessToken,{ path: "/" });
           setLoginButtonValue("Login");

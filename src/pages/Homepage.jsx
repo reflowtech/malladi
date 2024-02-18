@@ -13,15 +13,34 @@ const Homepage = () => {
 
   const getCookie = async () => {
     try {
-      const user = await Cookies.get("user");
+      const user = Cookies.get("user");
       if (user === undefined) {
         navigate("/login");
       }
     } catch (error) {
       console.error("Error while getting the user cookie:", error);
+      navigate("/login");
     }
   };
-  getCookie();
+  
+  useEffect(() => {
+    const fetchUserType = async () => {
+      const jwt =  Cookies.get("jwt");
+      const uid =  Cookies.get("uid");
+      if (jwt === undefined) {
+        navigate("/login");
+      } else {
+        const db = getDatabase();
+        const userRef = ref(db, `users/${uid}`);
+        onValue(userRef, (snapshot) => {
+          const data = snapshot.val();
+          setUserType(data.userType);
+          setLoading(false); 
+        });
+      }
+    };
+    fetchUserType();
+  }, [navigate]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -29,41 +48,26 @@ const Homepage = () => {
       if (user) {
         try {
         } catch (error) {
-          navigate("/");
+          navigate("/login");
         }
       } else {
-        navigate("/");
+        navigate("/login");
       }
     });
-
-    // Cleanup function to unsubscribe the observer when the component is unmounted
     return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const fetchuser = async () => {
-      const jwt = await Cookies.get("jwt");
-      const uid = await Cookies.get("uid");
-      if (jwt === undefined) {
-        navigate("/");
-      } else {
-        const db = getDatabase();
-        const userRef = ref(db, `users/${uid}`);
-        onValue(userRef, (snapshot) => {
-          const data = snapshot.val();
-          setUserType(data.userType);
-          setLoading(false);
-        });
-      }
-    };
-    fetchuser();
-  }, []);
+  }, [navigate]);
 
   return (
     <>
-      <div className="main-box">
-        {userType === "admin" ? <Admindash /> : <Userdash />}
+      {loading ? (
+        <div className="loader">
+        <h1>Loading...!</h1>
       </div>
+      ) : (
+        <div className="main-box">
+          {userType === "admin" ? <Admindash /> : <Userdash />}
+        </div>
+      )}
     </>
   );
 };

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Homepage />,
-      },
-      {
-        path: "/dashboard",
-        element: <h1>DASHBOARD</h1>,
       },
       {
         path: "/login",
