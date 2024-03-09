@@ -12,7 +12,7 @@ const Footer = () => {
           © Copyright <b> Refow Technologies Pvt. Ltd </b>
         </h1>
 
-        <h3>Made with <img  src="https://img.icons8.com/retro/32/like.png" alt="like"/> by <b>Bishal</b></h3>
+        {/* <h3>Made with <img  src="https://img.icons8.com/retro/32/like.png" alt="like"/> by <b>Bishal</b></h3> */}
       </section>
     </>
   );

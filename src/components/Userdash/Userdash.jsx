@@ -98,7 +98,7 @@ const Userdash = () => {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{allTopics["MALLADI/AX301/1/SNO"] || "LOADING..."}</td>
+                    <td>{"R-408" || "LOADING..."}</td>
                     <td>
                       {parseFloat(
                         allTopics["MALLADI/AX301/1/CALIBRATION_READ"]
@@ -132,7 +132,7 @@ const Userdash = () => {
                   </tr>
 
                   <tr>
-                    <td>{allTopics["MALLADI/AX301/2/SNO"] || "LOADING..."}</td>
+                    <td>{"R-404" || "LOADING..."}</td>
                     <td>
                       {parseFloat(
                         allTopics["MALLADI/AX301/2/CALIBRATION_READ"]
@@ -141,7 +141,7 @@ const Userdash = () => {
                   </tr>
 
                   <tr>
-                    <td>{allTopics["MALLADI/AX301/3/SNO"] || "LOADING..."}</td>
+                    <td>{"R-403" || "LOADING..."}</td>
                     <td>
                       {parseFloat(
                         allTopics["MALLADI/AX301/3/CALIBRATION_READ"]

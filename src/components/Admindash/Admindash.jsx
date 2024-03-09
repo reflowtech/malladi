@@ -63,6 +63,7 @@ const Admindash = () => {
           ...prevAllTopics,
           [receivedTopic]: parsedMessage,
         }));
+        console.log(allTopics);
       } catch (error) {}
     });
 
@@ -111,13 +112,11 @@ const Admindash = () => {
                 <tbody>
 
                   <tr>
-                  <td>{allTopics["MALLADI/AX301/1/SNO"] || "LOADING...."}</td>
-                    <td>{allTopics["MALLADI/AX301/1/MIN"] || "LOADING...."}</td>
-                    <td>{allTopics["MALLADI/AX301/1/MAX"] || "LOADING...."}</td>
-                    <td>
-                    {parseFloat(allTopics["MALLADI/AX301/1/CALIBRATION"]).toFixed(2) ||
-                        "LOADING...."}
-                    </td>
+                  <td><input type="text" value={"R-408" || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["MALLADI/AX301/1/MIN"] || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["MALLADI/AX301/1/MAX"] || "LOADING.."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["MALLADI/AX301/1/CALIBRATION"]).toFixed(2) ||
+                        "LOADING...."} /></td>
                     <td>
                       {parseFloat(allTopics["MALLADI/AX301/1/OP"]).toPrecision(
                         4
@@ -163,13 +162,11 @@ const Admindash = () => {
                   </tr>
 
                   <tr>
-                    <td>{allTopics["MALLADI/AX301/2/SNO"] || "LOADING...."}</td>
-                    <td>{allTopics["MALLADI/AX301/2/MIN"] || "LOADING...."}</td>
-                    <td>{allTopics["MALLADI/AX301/2/MAX"] || "LOADING...."}</td>
-                    <td>
-                      {parseFloat(allTopics["MALLADI/AX301/2/CALIBRATION"]).toFixed(2) ||
-                        "LOADING...."}
-                    </td>
+                  <td><input type="text" value={"R-404" || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["MALLADI/AX301/2/MIN"] || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["MALLADI/AX301/2/MAX"] || "LOADING.."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["MALLADI/AX301/2/CALIBRATION"]).toFixed(2) ||
+                        "LOADING...."} /></td>
                     <td>
                       {parseFloat(allTopics["MALLADI/AX301/2/OP"]).toPrecision(
                         4
@@ -190,13 +187,10 @@ const Admindash = () => {
                   </tr>
 
                   <tr>
-                    <td>{allTopics["MALLADI/AX301/3/SNO"] || "LOADING...."}</td>
-                    <td>{allTopics["MALLADI/AX301/3/MIN"] || "LOADING...."}</td>
-                    <td>{allTopics["MALLADI/AX301/3/MAX"] || "LOADING...."}</td>
-                    <td>
-                      {parseFloat(allTopics["MALLADI/AX301/3/CALIBRATION"]).toFixed(2) ||
-                        "LOADING...."}
-                    </td>
+                  <td><input type="text" value={"R-403" || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["MALLADI/AX301/3/MIN"] || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["MALLADI/AX301/3/MAX"] || "LOADING.."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["MALLADI/AX301/3/CALIBRATION"]).toFixed(2) || "LOADING...."} /></td>
                     <td>
                       {parseFloat(allTopics["MALLADI/AX301/3/OP"]).toPrecision(
                         4
