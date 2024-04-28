@@ -14,7 +14,7 @@ const Userdash = () => {
   const [allTopics, setAllTopics] = useState({});
   const username = import.meta.env.VITE_MQTT_USERNAME;
   const password = import.meta.env.VITE_MQTT_PASSWORD;
-  const topic = "MALLADI/AX301/#";
+  const topic = "AX3/01/#";
 
   useEffect(() => {
     const auth = getAuth();
@@ -87,6 +87,11 @@ const Userdash = () => {
               <p style={{ textAlign: "left", width: "100%" }}>
                 Hello, <strong>{Cookies.get("name")}</strong>{" "}
               </p>
+              <p style={{ textAlign: "left", width: "100%" }}>
+                <strong>Updated At: </strong>
+               {allTopics["AX3/01/MALLADI/UPDATE_TIME"] || "Loading..."}
+              </p>
+
               <table>
                 <thead>
                   <tr>
@@ -101,18 +106,18 @@ const Userdash = () => {
                     <td>{"R-408" || "LOADING..."}</td>
                     <td>
                       {parseFloat(
-                        allTopics["MALLADI/AX301/1/CALIBRATION_READ"]
-                      ).toPrecision(4)}
+                        allTopics["AX3/01/MALLADI/1/CALIBRATED_VALUE"]
+                      ).toPrecision(5)}
                     </td>
                     <td
                       rowSpan={3}
                       style={{
                         background:
-                          "Online" === "Online" ? "green" : "rgb(245,106,94)",
+                          allTopics["AX3/01/MALLADI/STATUS"] === "Online" ? "green" : "rgb(245,106,94)",
                         color: "white",
                       }}
                     >
-                      Online
+                      {allTopics["AX3/01/MALLADI/STATUS"] || "Loading..."}
                     </td>
                     <td
                       rowSpan={3}
@@ -135,7 +140,7 @@ const Userdash = () => {
                     <td>{"R-404" || "LOADING..."}</td>
                     <td>
                       {parseFloat(
-                        allTopics["MALLADI/AX301/2/CALIBRATION_READ"]
+                        allTopics["AX3/01/MALLADI/2/CALIBRATED_VALUE"]
                       ).toPrecision(4)}
                     </td>
                   </tr>
@@ -144,7 +149,7 @@ const Userdash = () => {
                     <td>{"R-403" || "LOADING..."}</td>
                     <td>
                       {parseFloat(
-                        allTopics["MALLADI/AX301/3/CALIBRATION_READ"]
+                        allTopics["AX3/01/MALLADI/3/CALIBRATED_VALUE"]
                       ).toPrecision(4)}
                     </td>
                   </tr>

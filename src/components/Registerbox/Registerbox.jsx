@@ -55,6 +55,8 @@ const Registerbox = () => {
       // Set the user type in the database based on the selected type
       const userTypeRef = ref(database, `users/${uid}/userType`);
       await set(userTypeRef, userType);
+      const emailRef = ref(database, `users/${uid}/email`);
+      await set(emailRef, email);
 
       // Send email verification
       await sendEmailVerification(userCredential.user);

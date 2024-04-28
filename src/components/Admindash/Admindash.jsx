@@ -14,7 +14,7 @@ const Admindash = () => {
   const [allTopics, setAllTopics] = useState({});
   const username = import.meta.env.VITE_MQTT_USERNAME;
   const password = import.meta.env.VITE_MQTT_PASSWORD;
-  const topic = "MALLADI/AX301/#";
+  const topic = "AX3/01/MALLADI/#";
 
   useEffect(() => {
     const auth = getAuth();
@@ -63,7 +63,6 @@ const Admindash = () => {
           ...prevAllTopics,
           [receivedTopic]: parsedMessage,
         }));
-        console.log(allTopics);
       } catch (error) {}
     });
 
@@ -90,6 +89,11 @@ const Admindash = () => {
                 </p>
                 <Link to="/register">Add User</Link>
               </div>
+              <div className="dashintro">
+                <p style={{ textAlign: "left", width: "100%" }}>
+                  <strong>Updated At : </strong>{allTopics["AX3/01/MALLADI/UPDATE_TIME"] || "Loading..."}
+                </p>
+              </div>
 
               <table>
                 <thead>
@@ -98,6 +102,7 @@ const Admindash = () => {
                     <th rowSpan={2}>Serial No</th>
                     <th colSpan={2}>Range</th>
                     <th rowSpan={2}>Calibration</th>
+                    <th rowSpan={2}>Factor</th>
                     <th rowSpan={2}>Readings</th>
                     <th rowSpan={2}>Calibrated Readings</th>
                     <th rowSpan={2}>Temperature Level</th>
@@ -113,36 +118,38 @@ const Admindash = () => {
 
                   <tr>
                   <td><input type="text" value={"R-408" || "LOADING.."} /></td>
-                  <td><input type="text" value={allTopics["MALLADI/AX301/1/MIN"] || "LOADING.."} /></td>
-                  <td><input type="text" value={allTopics["MALLADI/AX301/1/MAX"] || "LOADING.."} /></td>
-                  <td><input type="text" value={parseFloat(allTopics["MALLADI/AX301/1/CALIBRATION"]).toFixed(2) ||
+                  <td><input type="text" value={allTopics["AX3/01/MALLADI/1/CONFIG/MIN"] || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["AX3/01/MALLADI/1/CONFIG/MAX"] || "LOADING.."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["AX3/01/MALLADI/1/CONFIG/CALIBRATION"]).toFixed(2) ||
+                        "LOADING...."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["AX3/01/MALLADI/1/CONFIG/FACTOR"]).toFixed(2) ||
                         "LOADING...."} /></td>
                     <td>
-                      {parseFloat(allTopics["MALLADI/AX301/1/OP"]).toPrecision(
+                      {parseFloat(allTopics["AX3/01/MALLADI/1/VALUE"]).toPrecision(
                         4
                       ) || "LOADING...."}  &deg;C
                     </td>
                     <td>
                       {parseFloat(
-                        allTopics["MALLADI/AX301/1/CALIBRATION_READ"]
+                        allTopics["AX3/01/MALLADI/1/CALIBRATED_VALUE"]
                       ).toPrecision(4) || "LOADING...."}  &deg;C
                     </td>
                     <td>
                       <meter
-                        value={parseFloat(allTopics["MALLADI/AX301/1/OP"]) || 0}
-                        min={allTopics["MALLADI/AX301/1/MIN"]}
-                        max={allTopics["MALLADI/AX301/1/MAX"]}
+                        value={parseFloat(allTopics["AX3/01/MALLADI/1/CALIBRATED_VALUE"]) || 0}
+                        min={allTopics["AX3/01/MALLADI/1/CONFIG/MIN"]}
+                        max={allTopics["AX3/01/MALLADI/1/CONFIG/MAX"]}
                       ></meter>
                     </td>
                     <td
                       rowSpan={3}
                       style={{
                         background:
-                          "Online" === "Online" ? "green" : "rgb(245,106,94)",
+                          allTopics["AX3/01/MALLADI/STATUS"] === "Online" ? "green" : "rgb(245,106,94)",
                         color: "white",
                       }}
                     >
-                      Online
+                      {allTopics["AX3/01/MALLADI/STATUS"] || "Loading..."}
                     </td>
                     <td
                       rowSpan={3}
@@ -163,49 +170,52 @@ const Admindash = () => {
 
                   <tr>
                   <td><input type="text" value={"R-404" || "LOADING.."} /></td>
-                  <td><input type="text" value={allTopics["MALLADI/AX301/2/MIN"] || "LOADING.."} /></td>
-                  <td><input type="text" value={allTopics["MALLADI/AX301/2/MAX"] || "LOADING.."} /></td>
-                  <td><input type="text" value={parseFloat(allTopics["MALLADI/AX301/2/CALIBRATION"]).toFixed(2) ||
+                  <td><input type="text" value={allTopics["AX3/01/MALLADI/2/CONFIG/MIN"] || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["AX3/01/MALLADI/2/CONFIG/MAX"] || "LOADING.."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["AX3/01/MALLADI/2/CONFIG/CALIBRATION"]).toFixed(2) ||
+                        "LOADING...."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["AX3/01/MALLADI/2/CONFIG/FACTOR"]).toFixed(2) ||
                         "LOADING...."} /></td>
                     <td>
-                      {parseFloat(allTopics["MALLADI/AX301/2/OP"]).toPrecision(
+                      {parseFloat(allTopics["AX3/01/MALLADI/2/VALUE"]).toPrecision(
                         4
                       ) || "LOADING...."}  &deg;C
                     </td>
                     <td>
                       {parseFloat(
-                        allTopics["MALLADI/AX301/2/CALIBRATION_READ"]
+                        allTopics["AX3/01/MALLADI/2/CALIBRATED_VALUE"]
                       ).toPrecision(4) || "LOADING...."}  &deg;C
                     </td>
                     <td>
                       <meter
-                        value={parseFloat(allTopics["MALLADI/AX301/2/OP"]) || 0}
-                        min={allTopics["MALLADI/AX301/2/MIN"]}
-                        max={allTopics["MALLADI/AX301/2/MAX"]}
+                        value={parseFloat(allTopics["AX3/01/MALLADI/2/VALUE"]) || 0}
+                        min={allTopics["AX3/01/MALLADI/2/CONFIG/MIN"]}
+                        max={allTopics["AX3/01/MALLADI/2/CONFIG/MAX"]}
                       ></meter>
                     </td>
                   </tr>
 
                   <tr>
                   <td><input type="text" value={"R-403" || "LOADING.."} /></td>
-                  <td><input type="text" value={allTopics["MALLADI/AX301/3/MIN"] || "LOADING.."} /></td>
-                  <td><input type="text" value={allTopics["MALLADI/AX301/3/MAX"] || "LOADING.."} /></td>
-                  <td><input type="text" value={parseFloat(allTopics["MALLADI/AX301/3/CALIBRATION"]).toFixed(2) || "LOADING...."} /></td>
+                  <td><input type="text" value={allTopics["AX3/01/MALLADI/3/CONFIG/MIN"] || "LOADING.."} /></td>
+                  <td><input type="text" value={allTopics["AX3/01/MALLADI/3/CONFIG/MAX"] || "LOADING.."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["AX3/01/MALLADI/2/CONFIG/CALIBRATION"]).toFixed(2) || "LOADING...."} /></td>
+                  <td><input type="text" value={parseFloat(allTopics["AX3/01/MALLADI/2/CONFIG/FACTOR"]).toFixed(2) || "LOADING...."} /></td>
                     <td>
-                      {parseFloat(allTopics["MALLADI/AX301/3/OP"]).toPrecision(
+                      {parseFloat(allTopics["AX3/01/MALLADI/2/VALUE"]).toPrecision(
                         4
                       )  || "LOADING...."} &deg;C
                     </td>
                     <td>
                       {parseFloat(
-                        allTopics["MALLADI/AX301/3/CALIBRATION_READ"]
+                        allTopics["AX3/01/MALLADI/2/CALIBRATED_VALUE"]
                       ).toPrecision(4) || "LOADING...."}  &deg;C
                     </td>
                     <td>
                       <meter
-                        value={parseFloat(allTopics["MALLADI/AX301/3/OP"]) || 0}
-                        min={allTopics["MALLADI/AX301/3/MIN"]}
-                        max={allTopics["MALLADI/AX301/3/MAX"]}
+                        value={parseFloat(allTopics["AX3/01/MALLADI/2/VALUE"]) || 0}
+                        min={allTopics["AX3/01/MALLADI/3/CONFIG/MIN"]}
+                        max={allTopics["AX3/01/MALLADI/3/CONFIG/MAX"]}
                       ></meter>
                     </td>
                   </tr>
